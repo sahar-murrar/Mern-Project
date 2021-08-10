@@ -50,7 +50,17 @@ module.exports.addUser = (request, response) => {
 
 module.exports.getAllProducts = (request, response) => {
     Product.find({})
-        .then(authors => response.json(authors))
+        .then(products => response.json(products))
+        .catch(err => response.json(err))
+}
+module.exports.getAllSuperMarkets = (request, response) => {
+    Supermarket.find({})
+        .then(supermarkets => response.json(supermarkets))
+        .catch(err => response.json(err))
+}
+module.exports.getAllUsers = (request, response) => {
+    User.find({})
+        .then(users => response.json(users))
         .catch(err => response.json(err))
 }
 
@@ -59,4 +69,50 @@ module.exports.getSuperMarket = (request, response) => {
         .then(Supermarket => response.json(Supermarket))
         .catch(err => response.json(err))
 }
+module.exports.getProduct = (request, response) => {
+    Product.findOne({_id:request.params.id})
+        .then(Product => response.json(Product))
+        .catch(err => response.json(err))
+}
+module.exports.getUser = (request, response) => {
+    User.findOne({_id:request.params.id})
+        .then(User => response.json(User))
+        .catch(err => response.json(err))
+}
+
+module.exports.deleteProduct = (request, response) => {
+    Product.deleteOne({ _id: request.params.id })
+        .then(deleteConfirmation => response.json(deleteConfirmation))
+        .catch(err => response.json(err))
+}
+
+module.exports.deleteUser = (request, response) => {
+    User.deleteOne({ _id: request.params.id })
+        .then(deleteConfirmation => response.json(deleteConfirmation))
+        .catch(err => response.json(err))
+}
+
+module.exports.deleteSupermarket = (request, response) => {
+    Supermarket.deleteOne({ _id: request.params.id })
+        .then(deleteConfirmation => response.json(deleteConfirmation))
+        .catch(err => response.json(err))
+
+}
+module.exports.updateSupermarket = (request, response) => {
+    Supermarket.findOneAndUpdate({_id: request.params.id}, request.body, {new:true, runValidators:true})
+        .then(updatedSupermarket => response.json(updatedSupermarket))
+        .catch(err => response.status(400).json(err));
+}
+module.exports.updateUser = (request, response) => {
+    User.findOneAndUpdate({_id: request.params.id}, request.body, {new:true, runValidators:true})
+        .then(updatedUser => response.json(updatedUser))
+        .catch(err => response.status(400).json(err));
+}
+module.exports.updateProduct = (request, response) => {
+    Product.findOneAndUpdate({_id: request.params.id}, request.body, {new:true, runValidators:true})
+        .then(updatedProduct => response.json(updatedProduct))
+        .catch(err => response.status(400).json(err));
+}
+
+
 

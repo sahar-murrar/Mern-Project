@@ -5,7 +5,6 @@ import axios from 'axios';
 import {Router,navigate} from '@reach/router'
 import Home from './compnents/Home';
 import { set } from 'mongoose';
-import malak from './img/WANTED.JPG';
 function App() {
 
   // const [img, setImg]= useState("");
