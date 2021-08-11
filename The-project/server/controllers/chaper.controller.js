@@ -21,7 +21,7 @@ module.exports.addProduct = (request, response) => {
         .then(created => response.json(created))
         response.json(product)
     })
-        .catch(err => response.json(err));
+        .catch(err => response.status(400).json(err));
 }
 module.exports.addSuperMarket = (request, response) => {
     const { supermarketName, email, phone, location, password} = request.body;
@@ -33,7 +33,7 @@ module.exports.addSuperMarket = (request, response) => {
         password
     })
         .then(Supermarket => response.json(Supermarket))
-        .catch(err => response.json(err));
+        .catch(err => response.status(400).json(err));
 }
 module.exports.addUser = (request, response) => {
     const { name, email, phone, location, password} = request.body;
@@ -45,7 +45,7 @@ module.exports.addUser = (request, response) => {
         password
     })
         .then(User => response.json(User))
-        .catch(err => response.json(err));
+        .catch(err => response.status(400).json(err));
 }
 
 module.exports.getAllProducts = (request, response) => {
@@ -114,5 +114,20 @@ module.exports.updateProduct = (request, response) => {
         .catch(err => response.status(400).json(err));
 }
 
+module.exports.getSupermarket = (request, response) => {
+    Supermarket.findOne({_id:request.params.id})
+        .then(supermarket => response.json(supermarket))
+        .catch(err => response.json(err))
+}
+module.exports.getProduct = (request, response) => {
+    Product.findOne({_id:request.params.id})
+        .then(product => response.json(product))
+        .catch(err => response.json(err))
+}
 
+module.exports.getUser = (request, response) => {
+    User.findOne({_id:request.params.id})
+        .then(user => response.json(user))
+        .catch(err => response.json(err))
+}
 

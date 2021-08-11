@@ -1,0 +1,19 @@
+*{
+    margin: 0px auto;
+}
+table, td, th {
+    border: 1px solid black;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 700px;
+  }
+  
+  td {
+    text-align: center;
+  }
+  .error{
+    color: red;
+    font-weight: bold;
+  }
