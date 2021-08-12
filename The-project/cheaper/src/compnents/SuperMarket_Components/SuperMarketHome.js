@@ -82,21 +82,13 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SuperMarketHome = (props) => {
+  const {allProducts}=(props)
 
   const [product, setProduct] = useState({});
   const [pname, setPname] = useState("");
-    const [loaded, setLoaded] = useState(false);
-    const [allProducts, setAllProducts] = useState([]);
-    const [allProducts1, setAllProducts1] = useState([]);
-    const [loaded1, setLoaded1] = useState(false);
-    useEffect (() => {
-        axios.get('http://localhost:8000/api/products')
-        .then(res=> {
-          setAllProducts(res.data);
-            setLoaded1(true);
+  const [loaded, setLoaded] = useState(false);
+  const [allProducts1, setAllProducts1] = useState([]);
 
-        });
-    }, [])
 
     const classes = useStyles();
 
@@ -110,9 +102,10 @@ const SuperMarketHome = (props) => {
         navigate("/allProducts/"+props.supermarketName)
       }
       const nav =()=>{
+      
         console.log(pname)
-        console.log(allProducts)
-        var products_name= allProducts.filter(product => (product.productName === pname && product.supermarketName===props.supermarketName));
+        console.log(props.allProducts)
+        var products_name= props.allProducts.filter(product => (product.productName === pname && product.supermarketName===props.supermarketName));
         console.log(products_name)
         setAllProducts1(products_name)
         setLoaded(true)
@@ -183,7 +176,7 @@ const SuperMarketHome = (props) => {
                 <ListItemIcon>
                     <ExitToAppIcon />
                 </ListItemIcon>
-                <ListItemText primary="Logout" onClick={navigate("/")}/>
+                <ListItemText primary="Logout" onClick={e=>navigate("/")}/>
                 </ListItem>
               
             </div>
@@ -195,10 +188,11 @@ const SuperMarketHome = (props) => {
 
         </div>
         <div>
-        {loaded && 
+        
           
           <div>
-          {allProducts1.map((product)=>{
+          {loaded &&  allProducts1.map((product)=>{
+
                 return(
                   
                     <>
@@ -222,7 +216,7 @@ const SuperMarketHome = (props) => {
 
           </div>
 
-}
+
         </div>
 
         </div>
