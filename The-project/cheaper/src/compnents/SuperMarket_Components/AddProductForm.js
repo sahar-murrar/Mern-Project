@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
 
     FormControl,
@@ -20,18 +20,24 @@ const AddProductForm = (props) => {
     const [error, setError]= useState(" ");
     const [error1, setError1]= useState(" ");
     var img=initialImg
-    var supermarketName="bravo"
+    var supermarketName="shini"
+
+    const [allProducts, setAllProducts] = useState([]);
+    const [loaded, setLoaded] = useState(false);
+      useEffect(()=>{
+          axios.get('http://localhost:8000/api/products')
+              .then(res=>{
+                setAllProducts(res.data);
+                  setLoaded(true);
+              });
+      },[]);
    
     
     const onSubmitHandler = e => {
         //prevent default behavior of the submit
         e.preventDefault();
         var p = {productName, price, supermarketName, img}
-        // axios.post('http://localhost:8000/api/product/new',p)
-        //         .then(res=>{
-        //           console.log(res.data)
-        //         })
-        if(validatePName(productName)){
+        if(validatePName(productName) && validatePrice(price)){
             onSubmitProp({productName, price, supermarketName, img});
             setPname("");
             setPrice("");
@@ -41,6 +47,7 @@ const AddProductForm = (props) => {
        
     }
     const validatePName=(pname)=>{
+        var name_exists= allProducts.filter(product => (product.productName === pname));
         setPname(pname);
         if(pname===""){
             setError("Error: product name must not be empty");
@@ -51,6 +58,11 @@ const AddProductForm = (props) => {
             setError("Error: product name must be at least 3 characters")
             return false;
         }
+        // else if(name_exists.length !==0){
+        //     setError("Error: this product name is already exsits!!")
+        //     return false;
+
+        // }
         else{
             setError("")
             return true;

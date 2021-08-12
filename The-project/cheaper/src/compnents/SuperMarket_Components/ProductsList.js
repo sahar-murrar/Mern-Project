@@ -34,7 +34,7 @@ const ProductsList = (props) => {
                      </br>
 
                      <EditButton productId={product._id} successCallback={()=>navigate("/")}/> 
-                    <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/>
+                     <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/>
 
                      <p>--------------------------------------------------</p>
                      </>

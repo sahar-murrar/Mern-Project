@@ -7,6 +7,7 @@ import SuperMarketHome from './compnents/SuperMarket_Components/SuperMarketHome'
 import CreateProduct from './compnents/SuperMarket_Components/CreateProduct';
 import ProductsList from './compnents/SuperMarket_Components/ProductsList';
 import EditComponent from './compnents/EditComponent';
+import SearchComponent from './compnents/SuperMarket_Components/SearchComponent';
 function App() {
   var supermarketName="bravo"
 
@@ -19,6 +20,7 @@ function App() {
         <CreateProduct path="/addProduct"/>
         <ProductsList path="/allProducts/:supermarketName"/>
         <EditComponent path="/edit/:id"/>
+        <SearchComponent path="/searchProduct/:name"/>
       </Router>
      
     </div>

@@ -5,9 +5,13 @@ import AddProductForm from './AddProductForm';
 const CreateProduct = () => {
     const [error, setError]= useState([]);
     const createProduct = product => {
+        console.log(product)
+        console.log(product._id)
+        console.log(product.productName)
         axios.post('http://localhost:8000/api/product/new', product)
             .then(res=>{
-                // navigate("/players/list");
+                console.log("hereee")
+                
             })
             .catch(err=>{
               const errorResponse = err.response.data.errors; // Get the errors from err.response.data

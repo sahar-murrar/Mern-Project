@@ -10,7 +10,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-
+import {Button} from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -82,7 +82,22 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SuperMarketHome = (props) => {
-    
+
+  const [product, setProduct] = useState({});
+  const [pname, setPname] = useState("");
+    const [loaded, setLoaded] = useState(false);
+    const [allProducts, setAllProducts] = useState([]);
+    const [allProducts1, setAllProducts1] = useState([]);
+    const [loaded1, setLoaded1] = useState(false);
+    useEffect (() => {
+        axios.get('http://localhost:8000/api/products')
+        .then(res=> {
+          setAllProducts(res.data);
+            setLoaded1(true);
+
+        });
+    }, [])
+
     const classes = useStyles();
 
       const addProductForm=()=>{
@@ -93,6 +108,22 @@ const SuperMarketHome = (props) => {
       }
       const viewAllProducts=()=>{
         navigate("/allProducts/"+props.supermarketName)
+      }
+      const nav =()=>{
+        console.log(pname)
+        console.log(allProducts)
+        var products_name= allProducts.filter(product => (product.productName === pname && product.supermarketName===props.supermarketName));
+        console.log(products_name)
+        setAllProducts1(products_name)
+        setLoaded(true)
+        // navigate("/searchProduct/"+name)
+        // setPname(name)
+        // axios.get('http://localhost:8000/api/product/' + name)
+        // .then(res => {
+        //     setProduct(res.data);
+        //     setLoaded(true);
+        //     console.log(product)
+        // })
       }
     return (
         <div>
@@ -106,9 +137,13 @@ const SuperMarketHome = (props) => {
           </h3>
           <h4 style={{marginLeft:"500px"}}>Welcome, Bravo</h4>
           <div className={classes.search} style={{marginLeft:"400px"}}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+            <div className={classes.searchIcon} >
+              {/* <SearchIcon /> */}
+             
             </div>
+            <Button type="submit" variant="outlined" startIcon={<SearchIcon/>} onClick={nav}>
+                
+            </Button>
             <InputBase
               placeholder="Search…"
               classes={{
@@ -116,6 +151,8 @@ const SuperMarketHome = (props) => {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e)=>setPname(e.target.value)}
+              value={pname}
             />
           </div>
         </Toolbar>
@@ -157,9 +194,36 @@ const SuperMarketHome = (props) => {
 
 
         </div>
-        
-      
-   
+        <div>
+        {loaded && 
+          
+          <div>
+          {allProducts1.map((product)=>{
+                return(
+                  
+                    <>
+                     <p>Product Name: {product.productName}</p>
+                     <p>Product Price: {product.price}</p>
+                     <p>Supermarket Name: {product.supermarketName}</p>
+                     <img src={`../img/${product.img}`} alt="img"/> <br>
+                     </br>
+
+                     {/* <EditButton productId={product._id} successCallback={()=>navigate("/")}/> 
+                     <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/> */}
+
+                     <p>--------------------------------------------------</p>
+                     </>
+                    
+             
+                )
+                
+                })}
+
+
+          </div>
+
+}
+        </div>
 
         </div>
     )
