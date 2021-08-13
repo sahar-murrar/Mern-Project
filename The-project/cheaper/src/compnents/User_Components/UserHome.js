@@ -10,31 +10,47 @@ import Paper from '@material-ui/core/Paper';
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link } from '@reach/router';
+import {
+
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  Button
+} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
     },
   });
 
+
   
-  export default function BasicTable() {
-    const classes = useStyles();
-    const [allSuperMarkets, setAllSuperMarkets] = useState([]);
+  export default function BasicTable(props) {
+    const [pname, setPname] = useState("");
     const [loaded, setLoaded] = useState(false);
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/supermarkets')
-            .then(res =>{ 
-                setAllSuperMarkets(res.data)
-                setLoaded(true);
-            });
-    }, [])
+    const [allProducts1, setAllProducts1] = useState([]);
+    const classes = useStyles();
+   
+
+    const nav =()=>{
+     
+      console.log(pname)
+      console.log(props.allProducts)
+      var products_name= props.allProducts.filter(product => (product.productName === pname ));
+      console.log(products_name)
+      setAllProducts1(products_name)
+      setLoaded(true)
+  
+  }
   
     return (
         <div>
-            <form >
-            <input type="text" name="search" placeholder="Search.."></input>
-            <button type="submit">Search</button>
-            </form>
+          
+      <Button variant="outlined" startIcon={<SearchIcon/>} onClick={nav}></Button>
+      <InputLabel>Search ...</InputLabel>
+      <OutlinedInput type="text" onChange={(e)=>setPname(e.target.value)} value={pname}/>
       <TableContainer component={Paper}>
           
         <Table className={classes.table} aria-label="simple table">
@@ -47,7 +63,7 @@ const useStyles = makeStyles({
             </TableRow>
           </TableHead>
           <TableBody>
-            {allSuperMarkets.map((market) => (
+            {props.allSuperMarkets.map((market) => (
               <TableRow key={market._id}>
                 <TableCell component="th" scope="row">
                   <Link to={"/supermarketDetails/"+market.supermarketName} style={{textDecoration:"none", fontWeight: "bold"}}> {market.supermarketName}</Link>
@@ -60,6 +76,33 @@ const useStyles = makeStyles({
           </TableBody>
         </Table>
       </TableContainer>
+      {loaded ? 
+          <h3>Search results: </h3>
+          :null}
+
+      <div>
+          {loaded &&  allProducts1.map((product)=>{
+
+                return(
+                  
+                    <>
+                  
+                     <p>Product Name: {product.productName}</p>
+                     <p>Product Price: {product.price}</p>
+                     <p>Supermarket Name: {product.supermarketName}</p>
+                     <img src={`../img/${product.img}`} alt="img"/> <br>
+                     </br>
+
+                     <p>--------------------------------------------------</p>
+                     </>
+                    
+             
+                )
+                
+                })}
+
+
+          </div>
       </div>
     );
   }

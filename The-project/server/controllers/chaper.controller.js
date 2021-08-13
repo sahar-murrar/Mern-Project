@@ -12,7 +12,7 @@ module.exports.addProduct = (request, response) => {
         img
     })
     .then(product =>{
-        Supermarket.findOneAndUpdate({supermarketName: request.body.supermarketName},{$push:{products:product._id}}, {new:true}).populate('products')
+        Supermarket.findOneAndUpdate({supermarketName: request.body.supermarketName},{$push:{products:product}}, {new:true}).populate('products')
         .then(created => response.json(created))
         response.json(product)
     })
@@ -123,17 +123,5 @@ module.exports.getProduct = (request, response) => {
 module.exports.getUser = (request, response) => {
     User.findOne({_id:request.params.id})
         .then(user => response.json(user))
-        .catch(err => response.json(err))
-}
-
-module.exports.getProductByName = (request, response) => {
-    Product.findOne({productName:request.params.productName})
-        .then(product => response.json(product))
-        .catch(err => response.json(err))
-}
-
-module.exports.getSupermarketByName = (request, response) => {
-    Supermarket.findOne({supermarketName:request.params.supermarketName})
-        .then(supermarket => response.json(supermarket))
         .catch(err => response.json(err))
 }

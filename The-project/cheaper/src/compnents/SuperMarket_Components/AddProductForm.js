@@ -20,7 +20,7 @@ const AddProductForm = (props) => {
     const [error, setError]= useState(" ");
     const [error1, setError1]= useState(" ");
     var img=initialImg
-    var supermarketName="shini"
+    var supermarketName="bravo"
 
     const [allProducts, setAllProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);
