@@ -45,7 +45,9 @@ const ViewSupermarketDetails = (props) => {
 
     return (
         <div>
-           <Link to={"chatWith/"+props.name}>Chat with {props.name} Supermarket </Link>
+           <Link to={"/chatWith/"+props.name}>Chat with {props.name} Supermarket </Link>
+           <br></br>
+           <br></br>
           
           <Button variant="outlined" startIcon={<SearchIcon/>} onClick={nav}></Button>
           <InputLabel>Search ...</InputLabel>
