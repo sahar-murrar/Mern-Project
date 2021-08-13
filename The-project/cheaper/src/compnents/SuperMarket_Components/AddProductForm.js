@@ -142,7 +142,7 @@ const AddProductForm = (props) => {
                 <br></br> */}
             
                     <Button type="submit" variant="contained" color="primary">
-                    Add
+                    Add/Update
                     </Button>
                 
             </form>

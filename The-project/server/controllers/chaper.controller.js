@@ -2,11 +2,6 @@ const { Supermarket } = require('../models/superMarket.models');
 const { Product} = require('../models/product.models');
 const { User } = require('../models/user.models');
 
-module.exports.index = (request, response) => {
-    response.json({
-        message: "Hello World"
-    });
-}
     // The method below is new
 module.exports.addProduct = (request, response) => {
     const { productName, price, supermarketName, img } = request.body;
@@ -17,7 +12,7 @@ module.exports.addProduct = (request, response) => {
         img
     })
     .then(product =>{
-        Supermarket.findOneAndUpdate({supermarketName: request.body.supermarketName},{$addToSet:{products:product._id}}, {new:true}).populate('products')
+        Supermarket.findOneAndUpdate({supermarketName: request.body.supermarketName},{$push:{products:product._id}}, {new:true}).populate('products')
         .then(created => response.json(created))
         response.json(product)
     })
@@ -131,3 +126,14 @@ module.exports.getUser = (request, response) => {
         .catch(err => response.json(err))
 }
 
+module.exports.getProductByName = (request, response) => {
+    Product.findOne({productName:request.params.productName})
+        .then(product => response.json(product))
+        .catch(err => response.json(err))
+}
+
+module.exports.getSupermarketByName = (request, response) => {
+    Supermarket.findOne({supermarketName:request.params.supermarketName})
+        .then(supermarket => response.json(supermarket))
+        .catch(err => response.json(err))
+}

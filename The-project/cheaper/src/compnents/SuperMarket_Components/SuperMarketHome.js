@@ -82,9 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SuperMarketHome = (props) => {
-  const {allProducts}=(props)
 
-  const [product, setProduct] = useState({});
   const [pname, setPname] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [allProducts1, setAllProducts1] = useState([]);
@@ -109,14 +107,7 @@ const SuperMarketHome = (props) => {
         console.log(products_name)
         setAllProducts1(products_name)
         setLoaded(true)
-        // navigate("/searchProduct/"+name)
-        // setPname(name)
-        // axios.get('http://localhost:8000/api/product/' + name)
-        // .then(res => {
-        //     setProduct(res.data);
-        //     setLoaded(true);
-        //     console.log(product)
-        // })
+
       }
     return (
         <div>

@@ -1,8 +1,8 @@
 const cheaperController = require('../controllers/chaper.controller');
 module.exports = function(app){
     app.get('/api/products', cheaperController.getAllProducts);
-    app.get('/api/supermarkets', cheaperController.getAllProducts);
-    app.get('/api/users', cheaperController.getAllProducts);
+    app.get('/api/supermarkets', cheaperController.getAllSuperMarkets);
+    app.get('/api/users', cheaperController.getAllUsers);
 
     
 
@@ -16,7 +16,9 @@ module.exports = function(app){
     app.put('/api/user/:id', cheaperController.updateUser);
 
     app.get('/api/supermarket/:id', cheaperController.getSupermarket);
+    app.get('/api/supermarketDetails/:name', cheaperController.getSupermarketByName);
     app.get('/api/product/:id', cheaperController.getProduct);
+    app.get('/api/productName/:name', cheaperController.getProductByName);
     app.get('/api/user/:id', cheaperController.getUser);
 
 

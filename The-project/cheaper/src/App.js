@@ -7,8 +7,8 @@ import SuperMarketHome from './compnents/SuperMarket_Components/SuperMarketHome'
 import CreateProduct from './compnents/SuperMarket_Components/CreateProduct';
 import ProductsList from './compnents/SuperMarket_Components/ProductsList';
 import EditComponent from './compnents/EditComponent';
-import SearchComponent from './compnents/SuperMarket_Components/SearchComponent';
-import SuperMarketList from './compnents/User_Components/SuperMarketList';
+import UserHome from './compnents/User_Components/UserHome';
+import ViewSupermarketDetails from './compnents/User_Components/ViewSupermarketDetails';
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [loaded1, setLoaded1] = useState(false);
@@ -35,8 +35,8 @@ function App() {
         <CreateProduct path="/addProduct"/>
         <ProductsList path="/allProducts/:supermarketName"/>
         <EditComponent path="/edit/:id"/>
-        <SearchComponent path="/searchProduct/:name"/>
-        <SuperMarketList path="/user" />
+        <UserHome path="/user" />
+        <ViewSupermarketDetails path="/supermarketDetails/:name"/>
       </Router>
      
     </div>
