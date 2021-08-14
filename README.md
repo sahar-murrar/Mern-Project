@@ -4,15 +4,20 @@ Done by (Mohammad Raddad , Sahar Murrar and Malak Akkas )
 
 ***Cheaper***
 What is ***Cheaper*** :
-Cheaper is a website that aims to save the customer money by providing the customer of the all supermarkets that sell the product s/he want to buy and the customer can choose the product according to the right price and supermarket location \n
+Cheaper is a website that aims to save the customer money by providing the customer of the all supermarkets that sell the product s/he want to buy and the customer can choose the product according to the right price and supermarket location 
 
 
 
 
 **Main Features**:\n
+
   **A.	Login and Registration:**
+  
     1.	Supermarket login: the supermarket owner has to enter his/her email and password
-    2.	Supermarket registration: the supermarket owner has to enter his/her information which are (supermarket name required & at least 3 characters, email required & unique ,          phone number & 10 characters , location required, password at least 5 characters)
+    
+    2.	Supermarket registration: the supermarket owner has to enter his/her information which are (supermarket name required & at least 3 characters, email required & unique , 
+    phone number & 10 characters , location required, password at least 5 characters)
+    
     3.	Customer login: the customer has to enter his/her email and password
     4.	Customer registration: the customer has to enter his/her information which are (name required & at least 3 characters, email required & unique , phone number & 10                     characters , location required, password at least 5 characters)
   **B.	Supermarket Features:**
