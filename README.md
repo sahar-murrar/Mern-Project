@@ -6,6 +6,9 @@ Done by (Mohammad Raddad , Sahar Murrar and Malak Akkas )
 What is ***Cheaper*** :
 Cheaper is a website that aims to save the customer money by providing the customer of the all supermarkets that sell the product s/he want to buy and the customer can choose the product according to the right price and supermarket location
 
+
+
+
 **Main Features**:
   **A.	Login and Registration:**
     1.	Supermarket login: the supermarket owner has to enter his/her email and password
@@ -17,6 +20,5 @@ Cheaper is a website that aims to save the customer money by providing the custo
             C.	Customer Features:
             Customer can view the all supermarkets products in our website, and can search about a specific product in the navigation bar and the system will show a list of all                    supermarkets that sell this product with the prices and location, then the customer can choose one of them and confirm the order.
 
-            Also, the customer have a chat so s/he can contact with the supermarket s/he want
-            Or the supermarket can contact with the admin via the chat. 
+           
 
