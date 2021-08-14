@@ -21,7 +21,7 @@ const EditComponent = (props) => {
     const editProduct = product => {
         axios.put('http://localhost:8000/api/product/' + id, product)
             .then(res=>{
-                navigate("/");
+                // navigate("/");
             })
             .catch(err=>{
                 const errorResponse = err.response.data.errors; // Get the errors from err.response.data

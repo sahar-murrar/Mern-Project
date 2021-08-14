@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import {useState } from 'react'
 import AddProductForm from './AddProductForm';
-const CreateProduct = () => {
+const CreateProduct = (props) => {
     const [error, setError]= useState([]);
     const createProduct = product => {
         console.log(product)
@@ -25,7 +25,7 @@ const CreateProduct = () => {
         }   
     return (
         <div>
-             <AddProductForm onSubmitProp={createProduct}  initialName="" initialPrice="" initialImg="" name_error={error} />
+             <AddProductForm onSubmitProp={createProduct}  supermarketName={props.name} initialName="" initialPrice="" initialImg="" name_error={error} />
         </div>
     )
 }

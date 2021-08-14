@@ -13,14 +13,14 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 import "../../styles/style.css"
 const AddProductForm = (props) => {
-    const {onSubmitProp, initialName,initialPrice, initialImg, name_error}= props;
+    const {onSubmitProp, initialName,initialPrice, initialImg, name_error, supermarketName}= props;
     const [productName, setPname] = useState(initialName);
     const [price, setPrice] = useState(initialPrice);
     // const [supermarketName, setSupermarketName] = useState(""); 
     const [error, setError]= useState(" ");
     const [error1, setError1]= useState(" ");
     var img=initialImg
-    var supermarketName="bravo"
+    // var supermarketName="bravo"
 
     const [allProducts, setAllProducts] = useState([]);
     const [loaded, setLoaded] = useState(false);

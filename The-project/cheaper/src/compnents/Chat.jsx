@@ -4,11 +4,12 @@ import {Paper, Drawer, SwipeableDrawer, Button, Box} from '@material-ui/core'
 import '../App.css'
 import SendIcon from '@material-ui/icons/Send';
 const socket = io('http://localhost:7000')
-const userName = 'User '+parseInt(Math.random()*10)
+// const userName = 'User '+parseInt(Math.random()*10)
 
-const Chat = () => {
+const Chat = (props) => {
     const [message, setMessage] = useState('')
     const [chat, setChat] = useState([])
+    const userName = props.name
   
     useEffect(() => {
       socket.on('message', payload => {

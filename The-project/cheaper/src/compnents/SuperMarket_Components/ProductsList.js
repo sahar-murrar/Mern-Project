@@ -13,16 +13,18 @@ const ProductsList = (props) => {
         .then(res=> {
             setProducts(res.data);
             setLoaded(true);
+            console.log(props.supermarketName)
 
         });
     }, [])
 
     const removeFromDom = (productId) => {
         setProducts(products.filter(product => product._id !== productId));
-        navigate("/productsList");
+        navigate("/allProducts/"+props.supermarketName);
     }
     return (
         <div>
+            <h1>hello</h1>
                 {products.map((product)=>{
                 return <div>
                     {product.supermarketName === props.supermarketName?
@@ -33,7 +35,7 @@ const ProductsList = (props) => {
                      <img src={`../img/${product.img}`} alt="img"/> <br>
                      </br>
 
-                     <EditButton productId={product._id} successCallback={()=>navigate("/")}/> 
+                     <EditButton productId={product._id} successCallback={()=>navigate("/allProducts/"+props.supermarketName)}/> 
                      <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/>
 
                      <p>--------------------------------------------------</p>

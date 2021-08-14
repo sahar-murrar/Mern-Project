@@ -20,7 +20,7 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import {useState, useEffect} from 'react';
-import {navigate} from '@reach/router'
+import {Link, navigate} from '@reach/router'
 import axios from 'axios';
 import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -91,20 +91,20 @@ const SuperMarketHome = (props) => {
     const classes = useStyles();
 
       const addProductForm=()=>{
-          navigate("/addProduct")
+          navigate("/addProduct/"+props.name)
       }
       const viewOrders =()=>{
         navigate("/orders")
       }
       const viewAllProducts=()=>{
-        navigate("/allProducts/"+props.supermarketName)
+        navigate("/allProducts/"+props.name)
       }
       const nav =()=>{
       
         console.log(pname)
         console.log(props.allProducts)
-        var products_name= props.allProducts.filter(product => (product.productName === pname && product.supermarketName===props.supermarketName));
-        console.log(products_name)
+        var products_name= props.allProducts.filter(product => (product.productName === pname && product.supermarketName===props.name));
+        console.log(products_name, "finalll")
         setAllProducts1(products_name)
         setLoaded(true)
 
@@ -119,7 +119,7 @@ const SuperMarketHome = (props) => {
           <h3 variant="h6" noWrap>
             Cheaper
           </h3>
-          <h4 style={{marginLeft:"500px"}}>Welcome, Bravo</h4>
+          <h4 style={{marginLeft:"500px"}}>Welcome, {props.name}</h4>
           <div className={classes.search} style={{marginLeft:"400px"}}>
             <div className={classes.searchIcon} >
               {/* <SearchIcon /> */}
@@ -173,6 +173,7 @@ const SuperMarketHome = (props) => {
             </div>
 
             <h2 style={{backgroundColor:"#ef9a9a", borderRadius:"20px", textAlign:"center" ,height:"40px", marginLeft:"130px"}}>Market your products, earn more for a better life</h2>
+            <Link to={"/chatWith/"+props.name}>Open Chat</Link>
 
 
 

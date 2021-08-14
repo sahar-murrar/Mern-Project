@@ -9,12 +9,16 @@ import EditComponent from './compnents/EditComponent';
 import UserHome from './compnents/User_Components/UserHome';
 import ViewSupermarketDetails from './compnents/User_Components/ViewSupermarketDetails';
 import Chat from './compnents/Chat';
+import Home from './compnents/Home';
+import Login from './compnents/Login';
+import Register from './compnents/Register';
+import ThankYou from './compnents/ThankYou';
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [loaded1, setLoaded1] = useState(false);
-  const [allSuperMarkets, setAllSuperMarkets] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  var supermarketName="shini"
+  // var supermarketName="shini"
   
   useEffect (() => {
       axios.get('http://localhost:8000/api/products')
@@ -24,9 +28,9 @@ function App() {
 
       });
 
-      axios.get('http://localhost:8000/api/supermarkets')
+      axios.get('http://localhost:8000/api/users')
       .then(res =>{ 
-          setAllSuperMarkets(res.data)
+        setAllUsers(res.data)
           setLoaded(true);
       });
   }, [])
@@ -34,17 +38,22 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={(e)=>navigate("/supermarket")}>supermarket home</button>
-      <button onClick={(e)=>navigate("/user")}>user home</button>
+      {/* <button onClick={(e)=>navigate("/supermarket")}>supermarket home</button>
+      <button onClick={(e)=>navigate("/user")}>user home</button> */}
+     
      
       <Router>
-        <SuperMarketHome supermarketName={supermarketName} allProducts={allProducts} path="/supermarket"/>  
-        <CreateProduct path="/addProduct"/>
+      <Home path="/"/>
+        <SuperMarketHome  allProducts={allProducts} path="/supermarket/:name"/>  
+        <CreateProduct path="/addProduct/:name"/>
         <ProductsList path="/allProducts/:supermarketName"/>
         <EditComponent path="/edit/:id"/>
-        <UserHome allSuperMarkets={allSuperMarkets}  allProducts={allProducts} path="/user" />
-        <ViewSupermarketDetails allSuperMarkets={allSuperMarkets} allProducts={allProducts} path="/supermarketDetails/:name"/>
+        <UserHome allUsers={allUsers}  allProducts={allProducts} path="/user/:name" />
+        <ViewSupermarketDetails allUsers={allUsers} allProducts={allProducts} path="/supermarketDetails/:name/:username"/>
         <Chat path="/chatWith/:name" />
+        <Login path="/login"/>
+        <Register path="/register"/>
+        <ThankYou path="/thankyou"/>
       </Router>
      
     </div>

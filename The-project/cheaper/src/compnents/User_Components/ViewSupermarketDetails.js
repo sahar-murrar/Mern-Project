@@ -9,8 +9,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Link } from '@reach/router';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link, navigate } from '@reach/router';
 import {
 
     FormControl,
@@ -22,6 +22,7 @@ const ViewSupermarketDetails = (props) => {
     const [pname, setPname] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [allProducts1, setAllProducts1] = useState([]);
+    var supermarkets= props.allUsers.filter(user => (user.role === "admin" ));
 
     const checkName=(currentName)=>{
         if(currentName === props.name){
@@ -42,10 +43,14 @@ const ViewSupermarketDetails = (props) => {
         setLoaded(true)
 
     }
+    
+  const thankyou=()=>{
+    navigate("/thankyou")
+  }
 
     return (
         <div>
-           <Link to={"/chatWith/"+props.name}>Chat with {props.name} Supermarket </Link>
+           <Link to={"/chatWith/"+props.username}>Chat with {props.name} Supermarket </Link>
            <br></br>
            <br></br>
           
@@ -55,10 +60,10 @@ const ViewSupermarketDetails = (props) => {
               
             <h1> Welcome to  {props.name} Supermarket page</h1>
 
-            {props.allSuperMarkets.map((market) => (
+            {supermarkets.map((market) => (
                
                     <>
-                {market.supermarketName === props.name ?
+                {market.name === props.name ?
                     <div>
                     
                     {props.allProducts.map((product) => {
@@ -70,6 +75,7 @@ const ViewSupermarketDetails = (props) => {
                             <p> Product name: {product.productName}</p>
                             <p> Product Price: {product.price}</p>
                             <img src={`../img/${product.img}`} alt="img"/> 
+                            <button onClick={thankyou}>Order Now</button>
                             <p>--------------------------------------</p>
                             </>
                             :null }
@@ -100,7 +106,9 @@ const ViewSupermarketDetails = (props) => {
                      <p>Product Name: {product.productName}</p>
                      <p>Product Price: {product.price}</p>
                      <p>Supermarket Name: {product.supermarketName}</p>
-                     <img src={`../img/${product.img}`} alt="img"/> <br>
+                     <img src={`../img/${product.img}`} alt="img"/>
+                     <button onClick={thankyou}>Order Now</button>
+                      <br>
                      </br>
 
                      <p>--------------------------------------------------</p>

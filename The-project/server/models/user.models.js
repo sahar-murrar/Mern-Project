@@ -27,9 +27,10 @@ const UserSchema = new mongoose.Schema({
         minlengrh: [5, "Password must be at least 5 charachters"] },
 
         
-        role: {
-            type:Number,
-            default:0
+        role : {
+            type : String,
+            enum : ['user','admin'],
+            required: true
         },
 
 });
