@@ -9,7 +9,7 @@ Cheaper is a website that aims to save the customer money by providing the custo
 
 
 
-**Main Features**:\n
+**Main Features**:
 
   **A.	Login and Registration:**
   
