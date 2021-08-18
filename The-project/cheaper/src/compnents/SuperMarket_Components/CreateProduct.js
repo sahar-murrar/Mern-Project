@@ -25,7 +25,7 @@ const CreateProduct = (props) => {
         }   
     return (
         <div>
-             <AddProductForm onSubmitProp={createProduct}  supermarketName={props.name} initialName="" initialPrice="" initialImg="" name_error={error} />
+             <AddProductForm onSubmitProp={createProduct}  supermarketName={props.name} initialName="" initialPrice="" initialImg="" name={props.name} name_error={error} />
         </div>
     )
 }

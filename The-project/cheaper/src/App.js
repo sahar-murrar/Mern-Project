@@ -37,7 +37,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: `url("https://static.vecteezy.com/system/resources/previews/002/984/599/non_2x/abstract-blur-and-defocused-supermarket-for-background-free-photo.jpg")`}}>
       {/* <button onClick={(e)=>navigate("/supermarket")}>supermarket home</button>
       <button onClick={(e)=>navigate("/user")}>user home</button> */}
      
@@ -53,7 +53,7 @@ function App() {
         <Chat path="/chatWith/:name" />
         <Login path="/login"/>
         <Register path="/register"/>
-        <ThankYou path="/thankyou"/>
+        <ThankYou path="/thankyou/:name"/>
       </Router>
      
     </div>

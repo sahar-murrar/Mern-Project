@@ -25,6 +25,13 @@ import axios from 'axios';
 import AddIcon from '@material-ui/icons/Add';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ViewListRoundedIcon from '@material-ui/icons/ViewListRounded';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import EditButton from '../EditButton'
+import DeleteButton from '../DeleteButton';
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -80,15 +87,27 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  const useStyles1 = makeStyles({
+    root: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 140,
+    },
+  });
+  
+
 
 const SuperMarketHome = (props) => {
 
   const [pname, setPname] = useState("");
   const [loaded, setLoaded] = useState(false);
   const [allProducts1, setAllProducts1] = useState([]);
+  const [products, setProducts] = useState([]);
 
 
     const classes = useStyles();
+    const classes1 = useStyles1();
 
       const addProductForm=()=>{
           navigate("/addProduct/"+props.name)
@@ -109,23 +128,27 @@ const SuperMarketHome = (props) => {
         setLoaded(true)
 
       }
+
+      const removeFromDom = (productId) => {
+        setProducts(props.allProducts.filter(product => product._id !== productId));
+        navigate("/allProducts/"+props.supermarketName);
+    }
     return (
         <div>
 
 <div className={classes.root} style={{marginLeft:"10px", marginTop:"10px", backgroundColor:"#fce4ec"}}>
       <AppBar position="static">
-        <Toolbar style={{ backgroundColor:"#fce4ec", color:"black"}}>
+
         
-          <h3 variant="h6" noWrap>
-            Cheaper
-          </h3>
-          <h4 style={{marginLeft:"500px"}}>Welcome, {props.name}</h4>
-          <div className={classes.search} style={{marginLeft:"400px"}}>
-            <div className={classes.searchIcon} >
-              {/* <SearchIcon /> */}
-             
-            </div>
-            <Button type="submit" variant="outlined" startIcon={<SearchIcon/>} onClick={nav}>
+<ul style={{listStyleType:"none",margin:"0px",padding:"0px",backgroundColor:"black",overflow:"hidden", height: "50px"}}>
+   <div style={{display:"flex"}}>
+     <Link to="/" style={{ textDecoration: "none"}}> <h2 style={{color:"white"}}>Cheaper</h2></Link>
+
+   <div style={{display:"flex", justifyContent:"space-between"}}>
+   <h4 style={{color:"white", marginLeft:"10px"}}>Welcome, {props.name} | </h4>
+   <h4> <Link style={{color:"white",textDecoration:"none"}} to="/"><li className="nav-item nav-link" style={{display:"inline"}}>  | Logout | </li></Link></h4>
+   <h4> <Link style={{color:"white",textDecoration:"none"}} to={"/chatWith/"+props.name}><li className="nav-item nav-link" style={{display:"inline"}}>  | Open Chat || </li></Link></h4>
+   <Button type="submit" variant="outlined" style={{backgroundColor:"#333", hieght:"6px"}} startIcon={<SearchIcon/>} onClick={nav}>
                 
             </Button>
             <InputBase
@@ -137,18 +160,30 @@ const SuperMarketHome = (props) => {
               inputProps={{ 'aria-label': 'search' }}
               onChange={(e)=>setPname(e.target.value)}
               value={pname}
+              style={{border:"4px black solid", }}
             />
-          </div>
-        </Toolbar>
+
+
+  
+
+
+   </div>
+   
+
+
+   </div>
+  
+    </ul>
+       
       </AppBar>
     </div>
-        <div style={{display:"flex", backgroundColor:"#fce4ec"}}>
-            <div style={{width:"300px", backgroundColor:"#fce4ec", marginLeft:"10px"}}>
+        <div style={{display:"flex"}}>
+            <div style={{width:"300px",height:"400px", marginLeft:"10px"}}>
             <ListItem button>
                 <ListItemIcon>
                     <ViewListRoundedIcon />
                 </ListItemIcon>
-                <ListItemText primary="All Products" onClick={viewAllProducts}/>
+                <ListItemText style={{ fontWeight:"bold"}} primary="All Products" onClick={viewAllProducts}/>
                 </ListItem>
                 <ListItem button>
                 <ListItemIcon>
@@ -163,18 +198,9 @@ const SuperMarketHome = (props) => {
                 </ListItemIcon>
                 <ListItemText primary="Customers Orders" onClick={viewOrders}/>
                 </ListItem>
-                <ListItem button>
-                <ListItemIcon>
-                    <ExitToAppIcon />
-                </ListItemIcon>
-                <ListItemText primary="Logout" onClick={e=>navigate("/")}/>
-                </ListItem>
+            
               
             </div>
-
-            <h2 style={{backgroundColor:"#ef9a9a", borderRadius:"20px", textAlign:"center" ,height:"40px", marginLeft:"130px"}}>Market your products, earn more for a better life</h2>
-            <Link to={"/chatWith/"+props.name}>Open Chat</Link>
-
 
 
 
@@ -188,16 +214,35 @@ const SuperMarketHome = (props) => {
                 return(
                   
                     <>
-                     <p>Product Name: {product.productName}</p>
-                     <p>Product Price: {product.price}</p>
-                     <p>Supermarket Name: {product.supermarketName}</p>
-                     <img src={`../img/${product.img}`} alt="img"/> <br>
+                      <Card className={classes1.root}>
+                        <CardActionArea>
+                            <CardMedia
+                            className={classes1.media}
+                            image={`../img/${product.img}`}
+                            title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                            {product.productName}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                            price: {product.price}
+                            </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                        <EditButton productId={product._id} successCallback={()=>navigate("/allProducts/"+props.supermarketName)}/> 
+                        <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/>
+                        </CardActions>
+                        </Card>
+                     
+                     <br>
                      </br>
 
                      {/* <EditButton productId={product._id} successCallback={()=>navigate("/")}/> 
                      <DeleteButton productId={product._id} successCallback={()=>removeFromDom(product._id)}/> */}
 
-                     <p>--------------------------------------------------</p>
+                    
                      </>
                     
              
@@ -208,10 +253,33 @@ const SuperMarketHome = (props) => {
 
           </div>
 
+    
+
 
         </div>
 
-        </div>
+
+        <ul style={{listStyleType:"none",margin:"0px",padding:"0px",backgroundColor:"black",overflow:"hidden",  position:"relative",top:"100px"}}>
+
+        {/* <div style={{width:"900px", marginRight:"160px", marginTop:"40px",position:"relative",top:"150px", color:"white"}}>
+      <h1>About Us</h1>
+         <h3 style={{fontWeight:"bold"}}> <span style={{color:"red"}}>Cheaper</span> is a website that aims to save the customer money by providing the customer of the all supermarkets that sell the product s/he want to buy and the customer can choose the product according to the right price and supermarket location</h3>
+
+      </div> */}
+
+
+      <div style={{position:"relative", color:"white"}}>
+      <h1>Contact Us</h1>
+         <h3 style={{fontWeight:"bold"}}> email: cheaper@gmail.com</h3>
+         <h3 style={{fontWeight:"bold"}}> phone: 059833747432</h3>
+         <h3 style={{fontWeight:"bold"}}> facebook: cheaperWebsite</h3>
+      </div>
+   
+  
+
+        </ul>
+
+      </div>
     )
 }
 

@@ -12,6 +12,9 @@ import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 import "../../styles/style.css"
+import {Link, navigate} from '@reach/router'
+import AppBar from '@material-ui/core/AppBar';
+import SearchIcon from '@material-ui/icons/Search';
 const AddProductForm = (props) => {
     const {onSubmitProp, initialName,initialPrice, initialImg, name_error, supermarketName}= props;
     const [productName, setPname] = useState(initialName);
@@ -96,7 +99,37 @@ const AddProductForm = (props) => {
     
     }
     return (
-        <div>
+        <div style={{height:"600px"}}>
+          
+      <AppBar position="static">
+        
+<ul style={{listStyleType:"none",margin:"0px",padding:"0px",backgroundColor:"black",overflow:"hidden", height: "50px"}}>
+   <div style={{display:"flex"}}>
+      
+     <Link to={"/supermarket/"+props.name} style={{ textDecoration: "none"}}> <h2 style={{color:"white"}}>Cheaper</h2></Link>
+
+   <div style={{display:"flex", justifyContent:"space-between"}}>
+   <h4 style={{color:"white", marginLeft:"10px"}}>Welcome, {props.name} | </h4>
+ 
+   <h4> <Link style={{color:"white",textDecoration:"none"}} to="/"><li className="nav-item nav-link" style={{display:"inline"}}>  | Logout | </li></Link></h4>
+   <h4> <Link style={{color:"white",textDecoration:"none"}} to={"/chatWith/"+props.name}><li className="nav-item nav-link" style={{display:"inline"}}>  | Open Chat </li></Link></h4>
+  
+   
+
+  
+
+
+   </div>
+   
+
+
+   </div>
+  
+    </ul>
+       
+      </AppBar>
+
+            <h1>Add a Product</h1>
              {name_error.map((err, index) => <p className="error" key={index}>{err}</p>)}
             <form onSubmit={onSubmitHandler}>
             <br></br>
@@ -121,31 +154,28 @@ const AddProductForm = (props) => {
                 </FormControl>
                 <br></br>
                 <br></br>
-                {/* <FormControl className={classes.margin}>
-                    <InputLabel id="demo-customized-select-label">Supermarket</InputLabel>
-                    <Select
-                    labelId="demo-customized-select-label"
-                    id="demo-customized-select"
-                    value={age}
-                    onChange={handleChange}
-                    input={<BootstrapInput />}
-                    >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                </FormControl>
-                <br></br>
-                <br></br> */}
+  
             
                     <Button type="submit" variant="contained" color="primary">
                     Add/Update
                     </Button>
                 
             </form>
+
+            <ul style={{listStyleType:"none",margin:"0px",padding:"0px",backgroundColor:"black",overflow:"hidden",  position:"relative",top:"160px"}}>
+
+
+
+<div style={{position:"relative", color:"white"}}>
+<h1>Contact Us</h1>
+ <h3 style={{fontWeight:"bold"}}> email: cheaper@gmail.com</h3>
+ <h3 style={{fontWeight:"bold"}}> phone: 059833747432</h3>
+ <h3 style={{fontWeight:"bold"}}> facebook: cheaperWebsite</h3>
+</div>
+
+
+
+</ul>
         </div>
     )
 }
